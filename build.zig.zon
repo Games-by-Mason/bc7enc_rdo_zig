@@ -1,0 +1,18 @@
+.{
+    .name = "bc7enc_rdo",
+    .version = "0.0.0",
+    .dependencies = .{
+        .bz7enc_rdo = .{
+            // Mirror available: https://github.com/Games-by-Mason/bc7enc_rdo
+            .url = "https://github.com/richgel999/bc7enc_rdo/archive/e6990bc11829c072d9f9e37296f3335072aab4e4.tar.gz",
+            .hash = "122015b6b9371467091eefd4720d363feea707bc700d2676bda2fe2b55629a18b435",
+        },
+    },
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "LICENSE",
+        "README.md",
+    },
+}
