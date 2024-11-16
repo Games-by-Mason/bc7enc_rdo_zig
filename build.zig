@@ -14,7 +14,7 @@ pub fn build(b: *std.Build) void {
     const upstream = b.dependency("bc7enc_rdo", .{});
 
     const lib = b.addStaticLibrary(.{
-        .name = "bc7enc",
+        .name = "bc7enc_rdo",
         .target = target,
         .optimize = optimize,
     });

@@ -17,7 +17,7 @@ The `bc7enc` command line tool as would be produced by the original project.
 
 Same as `bc7enc`, but patched to allow supplying an output argument with `-O`. This makes it easier to use with Zig's build system. I may eventually replace this with a command line tool implemented in Zig using [structopt](https://github.com/Games-by-Mason/structopt/), but this isn't high priority for me.
 
-### bc7enc (library)
+### bc7enc_rdo (library)
 
 The library code without the command line tool.
 
