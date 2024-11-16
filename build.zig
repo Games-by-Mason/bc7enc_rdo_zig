@@ -1,8 +1,15 @@
 const std = @import("std");
 
+const flags = &.{};
+
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
-    const optimize = b.standardOptimizeOption(.{});
+
+    // Debug mode builds trip safety checks, so only release builds are supported for now
+    const optimize: std.builtin.OptimizeMode = switch (b.standardOptimizeOption(.{})) {
+        .ReleaseSmall => .ReleaseSmall,
+        else => .ReleaseFast,
+    };
 
     const upstream = b.dependency("bz7enc_rdo", .{});
 
@@ -24,6 +31,7 @@ pub fn build(b: *std.Build) void {
             "ert.cpp",
             "rdo_bc_encoder.cpp",
         },
+        .flags = flags,
     });
     lib.linkLibCpp();
     lib.installHeadersDirectory(upstream.path("."), "bc7enc", .{});
@@ -41,11 +49,29 @@ pub fn build(b: *std.Build) void {
         .files = &.{
             "test.cpp",
         },
+        .flags = flags,
     });
     exe.linkLibrary(lib);
     b.installArtifact(exe);
 
-    const run_cmd = b.addRunArtifact(exe);
+    const exe_zig = b.addExecutable(.{
+        .name = "bz7enc-zig",
+        .target = target,
+        .optimize = optimize,
+    });
+
+    exe_zig.addIncludePath(upstream.path(""));
+    exe_zig.addCSourceFiles(.{
+        .root = b.path("src"),
+        .files = &.{
+            "main.cpp",
+        },
+        .flags = flags,
+    });
+    exe_zig.linkLibrary(lib);
+    b.installArtifact(exe_zig);
+
+    const run_cmd = b.addRunArtifact(exe_zig);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);
