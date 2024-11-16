@@ -11,10 +11,10 @@ pub fn build(b: *std.Build) void {
         else => .ReleaseFast,
     };
 
-    const upstream = b.dependency("bz7enc_rdo", .{});
+    const upstream = b.dependency("bc7enc_rdo", .{});
 
     const lib = b.addStaticLibrary(.{
-        .name = "bz7enc",
+        .name = "bc7enc",
         .target = target,
         .optimize = optimize,
     });
@@ -38,7 +38,7 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(lib);
 
     const exe = b.addExecutable(.{
-        .name = "bz7enc",
+        .name = "bc7enc",
         .target = target,
         .optimize = optimize,
     });
@@ -55,7 +55,7 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(exe);
 
     const exe_zig = b.addExecutable(.{
-        .name = "bz7enc-zig",
+        .name = "bc7enc-zig",
         .target = target,
         .optimize = optimize,
     });
