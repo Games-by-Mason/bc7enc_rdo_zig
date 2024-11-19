@@ -1,3 +1,7 @@
+# Deprecated
+
+Functionality has been moved to [dds](https://github.com/games-by-Mason/dds).
+
 # bc7enc_rdo_zig
 [bc7enc_rdo](https://github.com/richgel999/bc7enc_rdo) ported to the Zig build system. Builds the C++ executable and library, does not support the ISPC build.
 
